@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import Navigation from '@/components/auth/Navigation'
 import AuthContext from '@/app/context/AuthContext'
 import { getAuthSession } from '@/lib/nextauth'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,8 @@ export default async function RootLayout({
         <AuthContext>
           <div className="flex min-h-screen flex-col">
             <Navigation session={session}/>
+            <Toaster />
+            
             <main className="container mx-auto max-w-screen-md flex-1 px-2">
               {children}
             </main>
