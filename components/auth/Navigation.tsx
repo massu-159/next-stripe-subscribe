@@ -1,8 +1,16 @@
 'use client'
 
+import { Button } from "@/components/ui/button"
+import { type Session } from "next-auth"
+import LoginButton from "@/components/auth/LoginButton"
+import UserNavigation from "@/components/auth/UserNavigation"
 import Link from "next/link"
 
-const Navigation = () => {
+type NavigationProps = {
+  session: Session | null
+}
+
+const Navigation: React.FC<NavigationProps> = ({session}) => {
   return (
         <header className="shadow-lg shadow-gray-100 mb-10">
       <div className="container mx-auto flex max-w-screen-md items-center justify-between px-2 py-3">
@@ -10,7 +18,7 @@ const Navigation = () => {
           FullStackChannel
         </Link>
 
-        {/* {session?.user ? (
+        {session?.user ? (
           <div className="flex items-center justify-center space-x-5">
             <Button asChild variant="outline">
               <Link href="/quiz/new">クイズ作成</Link>
@@ -21,7 +29,7 @@ const Navigation = () => {
           <Button asChild>
             <Link href="/login">ログイン</Link>
           </Button>
-        )} */}
+        )}
       </div>
     </header>
   )
