@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navigation from '@/components/auth/Navigation'
+import AuthContext from '@/app/context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-  
+        <AuthContext>
           <div className="flex min-h-screen flex-col">
             <Navigation />
             <main className="container mx-auto max-w-screen-md flex-1 px-2">
@@ -32,6 +33,7 @@ export default function RootLayout({
               </div>
             </footer>
           </div>
+        </AuthContext>
       </body>
     </html>
   )
