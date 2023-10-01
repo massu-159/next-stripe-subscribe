@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# next-stripe-subscription
 
-## Getting Started
+決済プラットフォームStripeを使い、サブスクリプションサービス開発を学ぶためのサンプルアプリを作成。
 
-First, run the development server:
+NextAuthを使った認証機能を実装。
+GoogleのOAuth認証。
 
-```bash
+ORMにはPrismaを使用。
+
+DBはDockerでPostgreSQLの環境を構築。
+
+shadcn.uiを使用。CSSはtailwindCSSを使用。
+
+状態管理はzustand。
+
+データフェッチ・キャッシにはtanstackQuery。
+
+urlはこちら
+https : //github.com/massu-159/next-stripe-subscription
+
+
+## 目次
+1. 環境構築
+2. アプリケーションの仕様
+
+## 1. 環境構築
+
+### 1-1. ライブラリ インストール
+
+```
+npm install
+# または
+yarn
+# または
+pnpm install
+# または
+bun install
+```
+
+### 1-2. アプリケーション実行
+
+```
 npm run dev
-# or
+# または
 yarn dev
-# or
+# または
 pnpm dev
-# or
+# または
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 2. アプリケーションの仕様
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2-1. 仕様
+- 認証
+  - サインアップ
+  - ログイン
+  - ログアウト
+  - ユーザー情報更新
+- 決済
+  - サブスクリプション登録
+  - サブスクリプション更新
+  - サブスクリプション解除
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 2-2. 構成技術
+    @hookform/resolvers: ^3.3.1,
+    @next-auth/prisma-adapter: ^1.0.7,
+    @prisma/client: ^5.3.1,
+    @stripe/react-stripe-js: ^2.3.0,
+    @stripe/stripe-js: ^2.1.6,
+    @tanstack/react-query: ^4.35.3,
+    axios: ^1.5.1,
+    class-variance-authority: ^0.7.0,
+    clsx: ^2.0.0,
+    date-fns: ^2.30.0,
+    encoding: ^0.1.13,
+    next: latest,
+    next-auth: ^4.23.1,
+    openai: ^4.10.0,
+    react: latest,
+    react-hook-form: ^7.46.2,
+    stripe: ^13.8.0,
+    zod: ^3.22.2,
+    zustand: ^4.4.1
+    autoprefixer: latest,
+    eslint: latest,
+    postcss: latest,
+    prisma: ^5.3.1,
+    tailwindcss: latest,
+    typescript: latest
