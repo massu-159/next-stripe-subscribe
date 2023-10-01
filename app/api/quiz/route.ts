@@ -2,6 +2,9 @@ import { NextResponse } from "next/server"
 import OpenAI from "openai"
 import createQuiz from "@/actions/createQuiz"
 import createQuestion, { QuizDataType } from "@/actions/createQuestion"
+import checkSubscription from "@/actions/checkSubscription"
+import checkCount from "@/actions/checkCount"
+import updateCount from "@/actions/updateCount"
 
 // OpenAI設定
 const openai = new OpenAI()
@@ -64,6 +67,15 @@ export async function POST(request: Request) {
     const body = await request.json()
     const { topic, level, language, amount, userId } = body
 
+    // クイズ生成回数チェック
+    const isCount = await checkCount({ userId })
+    // サブスクリプション有効チェック
+    const isSubscription = await checkSubscription({ userId })
+
+    // 無料生成回数が残っていない場合
+    if (!isCount && !isSubscription) {
+      return new NextResponse("無料生成回数が終了しました。", { status: 403 })
+    }
     // ChatGPT
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo-0613",
@@ -100,7 +112,7 @@ export async function POST(request: Request) {
     // 引数チェック
     if (!responseMessage.function_call.arguments) {
       return new NextResponse("Function Call Arguments Error", {
-        status: 500,
+        status: 404,
       })
     }
 
@@ -161,6 +173,11 @@ export async function POST(request: Request) {
 
     // 質問データを保存
     await createQuestion({ data: quizData })
+
+    // 生成回数を更新
+    if (!isSubscription) {
+      await updateCount({ userId })
+    }
 
     return NextResponse.json({ quizId: responseQuiz.id }, { status: 200 })
   } catch (error) {

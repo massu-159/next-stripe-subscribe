@@ -5,6 +5,8 @@ import Navigation from '@/components/auth/Navigation'
 import AuthContext from '@/app/context/AuthContext'
 import { getAuthSession } from '@/lib/nextauth'
 import { Toaster } from '@/components/ui/toaster'
+import checkSubscription from '@/actions/checkSubscription'
+import ModalProvider from '@/components/subscription/ModalProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,13 +23,16 @@ export default async function RootLayout({
   // 認証情報を取得する
   const session = await getAuthSession()
   
+  const isSubscription = await checkSubscription({ userId: session?.user.id })
+  
   return (
     <html lang="ja">
       <body className={inter.className}>
         <AuthContext>
           <div className="flex min-h-screen flex-col">
-            <Navigation session={session}/>
+            <Navigation session={session} isSubscription={isSubscription} />
             <Toaster />
+            <ModalProvider />
             
             <main className="container mx-auto max-w-screen-md flex-1 px-2">
               {children}

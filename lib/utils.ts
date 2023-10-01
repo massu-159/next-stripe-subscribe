@@ -20,3 +20,5 @@ export function formatTimeDelta(seconds: number) {
 
   return parts.join(" ")
 }
+
+export const MAX_COUNT = 10
